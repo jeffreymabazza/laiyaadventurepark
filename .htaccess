@@ -1,0 +1,20 @@
+# deny from 180.191.138.187
+
+<IfModule mod_rewrite.c>
+   RewriteEngine On
+   SetEnv TZ Asia/Taipei
+   # If the user types just "admin".
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^admin$ admin\.php [L,QSA]
+
+   # If the user enter in any admin section, like "admin/section".
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteRule ^admin\/(.*)$ admin\.php/$1 [L,QSA]
+
+   RewriteCond %{REQUEST_FILENAME} !-f
+   RewriteCond %{REQUEST_FILENAME} !-d
+   RewriteCond %{REQUEST_FILENAME} !index\.php
+   RewriteRule ^(.*)$ index.php/$1 [L] 
+</ifModule>
