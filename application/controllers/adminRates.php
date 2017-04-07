@@ -24,6 +24,14 @@ class AdminRates extends CI_Controller {
 		$data['packages'] = $this->db->select('id, name')
 			->from('packages')
 			->get();
+		$data['packages_array'] = array_column($data['packages']->result_array(), 'name', 'id');
+
+		// $packages_array = $data['packages']->result_array();
+		// $test = array_column($packages_array, 'name', 'id');
+		// echo '<pre>';
+		// var_dump(array_search('2', array_flip($test)));
+		// exit;
+
 		$data['csrf']['name'] = $this->security->get_csrf_token_name();
 		$data['csrf']['hash'] = $this->security->get_csrf_hash();
 		$data['content'] = $this->load->view('admin/rates/rates/index', $data, true);
@@ -43,7 +51,7 @@ class AdminRates extends CI_Controller {
 			'attraction' => $this->input->post('attraction'),
 			'rate' => $this->input->post('rate') ?: 0,
 			'attraction_id' => $this->input->post('attraction_id'),
-			'package_id' => $this->input->post('package_id') ?: 0
+			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : ''
 		));
 
 		redirect('admin/rates');
@@ -62,7 +70,7 @@ class AdminRates extends CI_Controller {
 			'attraction' => $this->input->post('attraction'),
 			'rate' => $this->input->post('rate') ?: 0,
 			'attraction_id' => $this->input->post('attraction_id'),
-			'package_id' => $this->input->post('package_id') ?: 0
+			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : ''
 		));
 
 		redirect('admin/rates');

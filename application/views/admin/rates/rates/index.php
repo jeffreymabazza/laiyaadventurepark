@@ -56,11 +56,10 @@
 										 <?php echo $record->rate ?>
 									</td>
 									<td>
-										<?php if($record->package_id): ?>
-											<?php foreach($packages->result() as $package): ?>
-												<?php if($record->package_id == $package->id): ?>
-													<?php echo $package->name ?>
-												<?php endif; ?>
+										<?php $package_ids = unserialize($record->package_id) ?>
+										<?php if(is_array($package_ids) && $package_ids): ?>
+											<?php foreach($package_ids as $package_id): ?>
+												<?php echo @array_search($package_id, array_flip($packages_array)) ?>
 											<?php endforeach; ?>
 										<?php endif; ?>
 									</td>
@@ -99,6 +98,20 @@
 														</select>
 													</div>
 													<div class="form-group">
+														<label>Packages</label>
+														<div class="input-group">
+															<div class="icheck-list">
+																<?php if($packages->result()): ?>
+																	<?php foreach($packages->result() as $package): ?>
+																		<?php $package_record = unserialize($record->package_id); ?>
+																			<label>
+																			<input name="package_ids[]" type="checkbox" class="icheck" value="<?php echo $package->id ?>"> <?php echo $package->name ?> </label>
+																	<?php endforeach; ?>
+																<?php endif; ?>
+															</div>
+														</div>
+													</div>
+													<!-- <div class="form-group">
 														<label>Package</label>
 														<select name="package_id" class="form-control">
 															<option value="0"></option>
@@ -108,7 +121,7 @@
 																<?php endforeach; ?>
 															<?php endif; ?>
 														</select>
-													</div>
+													</div> -->
 												</div>
 												<div class="modal-footer">
 													<button type="submit" class="btn blue">Save changes</button>
@@ -181,15 +194,17 @@
 								</select>
 							</div>
 							<div class="form-group">
-								<label>Package</label>
-								<select name="package_id" class="form-control">
-									<option value="0"></option>
-									<?php if($packages->result()): ?>
-										<?php foreach($packages->result() as $package): ?>
-											<option value="<?php echo $package->id ?>"><?php echo $package->name ?></option>
-										<?php endforeach; ?>
-									<?php endif; ?>
-								</select>
+								<label>Packages</label>
+								<div class="input-group">
+									<div class="icheck-list">
+										<?php if($packages->result()): ?>
+											<?php foreach($packages->result() as $package): ?>
+												<label>
+												<input name="package_ids[]" type="checkbox" class="icheck" value="<?php echo $package->id ?>"> <?php echo $package->name ?> </label>
+											<?php endforeach; ?>
+										<?php endif; ?>
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="modal-footer">
