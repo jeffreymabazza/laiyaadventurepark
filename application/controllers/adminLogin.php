@@ -32,6 +32,13 @@ class AdminLogin extends CI_Controller {
 
 	}
 
+	public function redirect_to_login()
+	{
+
+		redirect('admin/login');
+
+	}
+
 	/**
 	 * Admin dashboard
 	 * @return [type] [description]
@@ -52,6 +59,8 @@ class AdminLogin extends CI_Controller {
 	{
 
 		$data['error_message'] = $this->session->flashdata('error_message');
+		$data['csrf']['name'] = $this->security->get_csrf_token_name();
+		$data['csrf']['hash'] = $this->security->get_csrf_hash();
 
 		$this->load->view('admin/login/index', $data);
 
@@ -81,6 +90,13 @@ class AdminLogin extends CI_Controller {
 
 		$this->session->set_flashdata('error_message', 'Invalid username and/or password.');
 		redirect('admin/login');
+
+	}
+
+	public function logout()
+	{
+
+		$this->admin_model->admin_logout();
 
 	}
 

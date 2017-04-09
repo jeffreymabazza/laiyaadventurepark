@@ -43,7 +43,9 @@ $route['404_override'] = '';
 
 $route['admin/generate-admin-user'] = 'adminLogin/generate_admin_user';
 
+$route['admin'] = 'adminLogin/redirect_to_login';
 $route['admin/login'] = 'adminLogin/login';
+$route['admin/logout'] = 'adminLogin/logout';
 $route['admin/authenticate'] = 'adminLogin/authenticate';
 $route['admin/dashboard'] = 'adminLogin/dashboard';
 

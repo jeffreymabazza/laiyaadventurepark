@@ -18,7 +18,7 @@
 									<i class="glyphicon glyphicon-pencil"></i>
 									</a>
 									&nbsp;&nbsp;
-									<a class="fancybox-button" href="<?php echo base_url() ?>assets/uploads/sliders/thumb_<?php echo $record->filename ?>" title="" data-rel="fancybox-button">
+									<a class="fancybox-button" href="<?php echo base_url() ?>assets/uploads/sliders/thumb_<?php echo $record->filename ?>" title="<?php echo $record->title ?>" data-rel="fancybox-button">
 									<i class="glyphicon glyphicon-fullscreen"></i>
 									</a>
 									&nbsp;&nbsp;
@@ -40,6 +40,10 @@
 										</div>
 										<div class="modal-body">
 											 <input type="file" name="image" id="edit-browse-input-<?php echo $record->id ?>" style="display: none" accept="image/*">
+											 <div class="form-group">
+											 	<label>Title</label>
+											 	<input type="text" class="form-control" name="title" data-tabindex="1" placeholder="Title" required value="<?php echo $record->title ?>">
+											 </div>
 											 <button type="button" class="btn btn-success edit-browse" data-id="<?php echo $record->id ?>">Browse</button>
 											 <span id="edit-filename-<?php echo $record->id ?>"><?php echo $record->filename ?></span>
 										</div>
@@ -92,6 +96,10 @@
 						</div>
 						<div class="modal-body">
 							 <input type="file" name="image" id="add-browse-input" style="display: none" accept="image/*">
+							 <div class="form-group">
+							 	<label>Title</label>
+							 	<input type="text" class="form-control" name="title" data-tabindex="1" placeholder="Title" required>
+							 </div>
 							 <button type="button" class="btn btn-success" id="add-browse-file">Browse</button>
 							 <span id="add-filename"></span>
 						</div>

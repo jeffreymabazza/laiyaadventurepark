@@ -85,7 +85,22 @@
 
 <section id="main">
   <div class="home-slider owl-carousel owl-theme">
-    <div class="slide" style="background-image: url('<?php echo base_url() ?>assets/img/Slider_1.jpg');">
+    <?php if($sliders): ?>
+      <?php foreach($sliders as $slider): ?>
+        <div class="slide" style="background-image: url('<?php echo base_url() ?>assets/uploads/sliders/<?php echo $slider->filename ?>');">
+          <div class="slide-content">
+            <div class="slide-title">
+              <h1><?php echo $slider->title ?></h1>
+            </div>
+            <div class="slide-buttons">
+              <a href="#rates" class="ghost-btn fixed">RATES</a>
+              <a href="#contact" class="ghost-btn fixed">LOCATION</a>
+            </div>
+          </div>
+        </div>
+      <?php endforeach; ?>
+    <?php endif; ?>
+    <!-- <div class="slide" style="background-image: url('<?php echo base_url() ?>assets/img/Slider_1.jpg');">
       <div class="slide-content">
         <div class="slide-title">
           <h1>Life is one magnificent</h1>
@@ -168,7 +183,7 @@
           <a href="#contact" class="ghost-btn fixed">LOCATION</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </section>
 
@@ -324,12 +339,13 @@
                     <td class="center"><?php echo $rate->rate ?></td>
                     <?php if($packages): ?>
                       <?php foreach($packages as $package): ?>
-
+                        <?php $package_record = unserialize($rate->package_id); $package_record = is_array($package_record) ? $package_record : array(); ?>
+                          <td class="tcenter"><i class="<?php echo in_array($package->id, $package_record) ? 'fa fa-check' : '' ?>" aria-hidden="true"></i></td>
                       <?php endforeach; ?>
                     <?php endif; ?>
+                    <!-- <td class="tcenter"><i class="" aria-hidden="true"></i></td>
                     <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-                    <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-                    <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
+                    <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td> -->
                   </tr>
                 <?php else: ?>
                   <tr>
@@ -342,9 +358,15 @@
                         <tr>
                           <td class=""><?php echo $sub_attraction->attraction ?></td>
                           <td class="center"><?php echo $sub_attraction->rate ?></td>
+                          <?php if($packages): ?>
+                            <?php foreach($packages as $package): ?>
+                              <?php $package_record = unserialize($sub_attraction->package_id); $package_record = is_array($package_record) ? $package_record : array(); ?>
+                                <td class="tcenter"><i class="<?php echo in_array($package->id, $package_record) ? 'fa fa-check' : '' ?>" aria-hidden="true"></i></td>
+                            <?php endforeach; ?>
+                          <?php endif; ?>
+                          <!-- <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
                           <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-                          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-                          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
+                          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td> -->
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>

@@ -19,7 +19,7 @@ class Admin_Model extends CI_Model {
 	{
 
 		$this->session->set_userdata(array(
-			'admin_session' => true,
+			'admin_session' => $this->config->item('encryption_key'),
 			'name' => $user->name
 		));
 
@@ -41,7 +41,7 @@ class Admin_Model extends CI_Model {
 	private function validate_admin_session()
 	{
 
-		if( ! $this->session->userdata('admin_session')) {
+		if( ! $this->session->userdata('admin_session') && $this->session->userdata('admin_session') !== $this->config->item('encryption_key')) {
 			redirect('admin/login');
 		}
 

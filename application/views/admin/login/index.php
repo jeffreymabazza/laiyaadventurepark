@@ -49,6 +49,7 @@
 <div class="content">
 	<!-- BEGIN LOGIN FORM -->
 	<form class="login-form" action="<?php echo base_url() ?>admin/authenticate" method="POST">
+		<input type="hidden" name="<?php echo $csrf['name'] ?>" value="<?php echo $csrf['hash'] ?>">
 		<h3 class="form-title">Sign In</h3>
 		<?php if( ! empty($error_message)): ?>
 			<div class="alert alert-danger">

@@ -5,17 +5,17 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 
-		$data['sliders'] = $this->db->select('filename')
+		$data['sliders'] = $this->db->select('title, filename')
 			->from('sliders')
 			->get()
 			->result();
 
-		$data['packages'] = $this->db->select('name, rate')
+		$data['packages'] = $this->db->select('id, name, rate')
 			->from('packages')
 			->get()
 			->result();
 
-		$data['rates'] = $this->db->select('id, attraction, rate, attraction_id')
+		$data['rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id')
 			->from('rates')
 			->where('attraction_id', 0)
 			->get()
@@ -23,7 +23,7 @@ class Welcome extends CI_Controller {
 
 		if($data['rates']) {
 			foreach($data['rates'] as $key => $rate) {
-				$data['rates'][$key]->sub_attractions = $this->db->select('attraction, rate')
+				$data['rates'][$key]->sub_attractions = $this->db->select('attraction, rate, package_id')
 					->from('rates')
 					->where('attraction_id', $rate->id)
 					->get()

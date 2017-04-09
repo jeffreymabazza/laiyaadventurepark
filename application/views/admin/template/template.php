@@ -90,14 +90,14 @@
 
 				<li class="<?php echo $this->uri->segment(2) == 'rates' ? 'open' : '' ?>">
 					<a href="javascript:;">
-					<i class="icon-home"></i>
+					<i class="glyphicon glyphicon-stats"></i>
 					<span class="title">Rates</span>
 					<span class="arrow <?php echo $this->uri->segment(2) == 'rates' ? 'open' : '' ?>"></span>
 					</a>
 					<ul class="sub-menu" style="<?php echo $this->uri->segment(2) == 'rates' ? 'display: block;' : '' ?>">
 						<li class="<?php echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == 'packages' ? 'active' : '' ?>">
 							<a href="<?php echo base_url() ?>admin/rates/packages">
-							<i class="icon-bar-chart"></i>
+							<i class="glyphicon glyphicon-briefcase"></i>
 							Packages</a>
 						</li>
 						<li class="<?php echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>

@@ -12,7 +12,7 @@ class AdminSlider extends CI_Controller {
 	public function index()
 	{
 
-		$data['records'] = $this->db->select('id, filename')
+		$data['records'] = $this->db->select('id, filename, title')
 			->from('sliders')
 			->order_by('id', 'desc')
 			->get();
@@ -48,7 +48,8 @@ class AdminSlider extends CI_Controller {
 			$image = $this->upload->data();
 
 			$this->db->insert('sliders', array(
-				'filename' => $image['file_name']
+				'filename' => $image['file_name'],
+				'title' => $this->input->post('title')
 			));
 
 			$thumb = new \Eventviva\ImageResize('./assets/uploads/sliders/' . $image['file_name']);
@@ -88,7 +89,8 @@ class AdminSlider extends CI_Controller {
 
 			$this->db->where('id', $id);
 			$this->db->update('sliders', array(
-				'filename' => $image['file_name']
+				'filename' => $image['file_name'],
+				'title' => $this->input->post('title')
 			));
 
 			$thumb = new \Eventviva\ImageResize('./assets/uploads/sliders/' . $image['file_name']);
@@ -99,6 +101,11 @@ class AdminSlider extends CI_Controller {
 				unlink('./assets/uploads/sliders/' . $record->filename);
 				unlink('./assets/uploads/sliders/thumb_' . $record->filename);
 			}
+		} else {
+			$this->db->where('id', $id);
+			$this->db->update('sliders', array(
+				'title' => $this->input->post('title')
+			));
 		}
 
 		redirect('admin/sliders');
