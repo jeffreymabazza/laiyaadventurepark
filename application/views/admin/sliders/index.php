@@ -44,6 +44,10 @@
 											 	<label>Title</label>
 											 	<input type="text" class="form-control" name="title" data-tabindex="1" placeholder="Title" required value="<?php echo $record->title ?>">
 											 </div>
+											 <div class="form-group">
+											 	<label>Title</label>
+											 	<input type="text" class="form-control" name="subtitle" data-tabindex="1" placeholder="Title" required value="<?php echo $record->subtitle ?>">
+											 </div>
 											 <button type="button" class="btn btn-success edit-browse" data-id="<?php echo $record->id ?>">Browse</button>
 											 <span id="edit-filename-<?php echo $record->id ?>"><?php echo $record->filename ?></span>
 										</div>
@@ -99,6 +103,10 @@
 							 <div class="form-group">
 							 	<label>Title</label>
 							 	<input type="text" class="form-control" name="title" data-tabindex="1" placeholder="Title" required>
+							 </div>
+							 <div class="form-group">
+							 	<label>Title</label>
+							 	<input type="text" class="form-control" name="subtitle" data-tabindex="1" placeholder="Title" required>
 							 </div>
 							 <button type="button" class="btn btn-success" id="add-browse-file">Browse</button>
 							 <span id="add-filename"></span>

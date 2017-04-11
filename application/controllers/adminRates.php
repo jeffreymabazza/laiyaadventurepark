@@ -12,13 +12,15 @@ class AdminRates extends CI_Controller {
 	public function rates_index()
 	{
 
-		$data['records'] = $this->db->select('id, attraction, rate, is_sub_attraction, attraction_id, package_id')
+		$data['records'] = $this->db->select('id, attraction, rate, is_sub_attraction, attraction_id, package_id, is_promo')
 			->from('rates')
+			->where('is_promo', isset($_GET['is_promo']) ? 1 : 0)
 			->get()
 			->result();
-		$data['attractions'] = $this->db->select('id, attraction, attraction_id')
+		$data['attractions'] = $this->db->select('id, attraction, attraction_id, is_promo')
 			->from('rates')
 			->where('attraction_id', 0)
+			->where('is_promo', isset($_GET['is_promo']) ? 1 : 0)
 			->get()
 			->result();
 		$data['packages'] = $this->db->select('id, name')
@@ -51,8 +53,12 @@ class AdminRates extends CI_Controller {
 			'attraction' => $this->input->post('attraction'),
 			'rate' => $this->input->post('rate') ?: 0,
 			'attraction_id' => $this->input->post('attraction_id'),
-			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : ''
+			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : '',
+			'is_promo' => $this->input->post('is_promo')
 		));
+
+		if(isset($_GET['is_promo']))
+			redirect('admin/rates?is_promo');
 
 		redirect('admin/rates');
 
@@ -70,8 +76,12 @@ class AdminRates extends CI_Controller {
 			'attraction' => $this->input->post('attraction'),
 			'rate' => $this->input->post('rate') ?: 0,
 			'attraction_id' => $this->input->post('attraction_id'),
-			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : ''
+			'package_id' => $this->input->post('package_ids') ? serialize($this->input->post('package_ids')) : '',
+			'is_promo' => $this->input->post('is_promo')
 		));
+
+		if(isset($_GET['is_promo']))
+			redirect('admin/rates?is_promo');
 
 		redirect('admin/rates');
 
@@ -101,6 +111,9 @@ class AdminRates extends CI_Controller {
 
 		$this->db->where('id', $id)
 			->delete('rates');
+
+		if(isset($_GET['is_promo']))
+			redirect('admin/rates?is_promo');
 
 		redirect('admin/rates');
 

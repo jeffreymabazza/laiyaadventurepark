@@ -5,7 +5,7 @@ class Welcome extends CI_Controller {
 	public function index()
 	{
 
-		$data['sliders'] = $this->db->select('title, filename')
+		$data['sliders'] = $this->db->select('title, subtitle, filename')
 			->from('sliders')
 			->get()
 			->result();
@@ -15,17 +15,37 @@ class Welcome extends CI_Controller {
 			->get()
 			->result();
 
-		$data['rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id')
+		$data['promo_rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id, is_promo')
 			->from('rates')
 			->where('attraction_id', 0)
+			->where('is_promo', 1)
 			->get()
 			->result();
 
-		if($data['rates']) {
-			foreach($data['rates'] as $key => $rate) {
-				$data['rates'][$key]->sub_attractions = $this->db->select('attraction, rate, package_id')
+		if($data['promo_rates']) {
+			foreach($data['promo_rates'] as $key => $rate) {
+				$data['promo_rates'][$key]->sub_attractions = $this->db->select('attraction, rate, package_id, is_promo')
 					->from('rates')
 					->where('attraction_id', $rate->id)
+					->where('is_promo', 1)
+					->get()
+					->result();
+			}
+		}
+
+		$data['regular_rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id, is_promo')
+			->from('rates')
+			->where('attraction_id', 0)
+			->where('is_promo', 0)
+			->get()
+			->result();
+
+		if($data['regular_rates']) {
+			foreach($data['regular_rates'] as $key => $rate) {
+				$data['regular_rates'][$key]->sub_attractions = $this->db->select('attraction, rate, package_id, is_promo')
+					->from('rates')
+					->where('attraction_id', $rate->id)
+					->where('is_promo', 0)
 					->get()
 					->result();
 			}

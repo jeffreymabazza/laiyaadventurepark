@@ -91,6 +91,7 @@
           <div class="slide-content">
             <div class="slide-title">
               <h1><?php echo $slider->title ?></h1>
+              <h1><?php echo $slider->subtitle ?></h1>
             </div>
             <div class="slide-buttons">
               <a href="#rates" class="ghost-btn fixed">RATES</a>
@@ -331,8 +332,8 @@
           <td class="tcenter">520/Head</td>
           <td class="tcenter">300/Head</td> -->
         </tr>
-        <?php if($rates): ?>
-            <?php foreach($rates as $rate): ?>
+        <?php if($promo_rates): ?>
+            <?php foreach($promo_rates as $rate): ?>
                 <?php if($rate->rate): ?>
                   <tr>
                     <td class="tbold"><?php echo $rate->attraction ?></td>

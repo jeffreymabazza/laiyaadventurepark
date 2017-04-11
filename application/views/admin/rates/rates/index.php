@@ -2,7 +2,7 @@
 	<div class="page-content">
 		<!-- BEGIN PAGE CONTENT-->
 		<h3 class="page-title">
-		Rates
+		Rates <small><?php echo isset($_GET['is_promo']) ? 'PROMO' : 'REGULAR' ?></small>
 		<a class="btn btn-xs btn-primary" title="Add image" data-toggle="modal" href="#add"><i class="glyphicon glyphicon-plus"></i></a>
 		</h3>
 		<div class="col-md-12">
@@ -56,7 +56,7 @@
 										 <?php echo $record->rate ?>
 									</td>
 									<td>
-										<?php $package_ids = unserialize($record->package_id) ?>
+										<?php $package_ids = @unserialize($record->package_id) ?>
 										<?php if(is_array($package_ids) && $package_ids): ?>
 											<?php foreach($package_ids as $package_id): ?>
 												<?php echo @array_search($package_id, array_flip($packages_array)) ?>
@@ -70,6 +70,7 @@
 									<div class="modal-dialog">
 										<form action="<?php echo base_url() ?>admin/rates/update/<?php echo $record->id ?>" method="POST">
 											<input type="hidden" name="<?php echo $csrf['name'] ?>" value="<?php echo $csrf['hash'] ?>">
+											<input type="hidden" name="is_promo" value="<?php echo isset($_GET['is_promo']) ? 1 : 0 ?>">
 											<div class="modal-content">
 												<div class="modal-header">
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
@@ -157,6 +158,7 @@
 			<div class="modal-dialog">
 				<form action="<?php echo base_url() ?>admin/rates/create" method="POST">
 					<input type="hidden" name="<?php echo $csrf['name'] ?>" value="<?php echo $csrf['hash'] ?>">
+					<input type="hidden" name="is_promo" value="<?php echo isset($_GET['is_promo']) ? 1 : 0 ?>">
 					<div class="modal-content">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
