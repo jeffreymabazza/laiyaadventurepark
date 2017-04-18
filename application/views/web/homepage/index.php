@@ -377,73 +377,83 @@
                 </tr>
             <?php endforeach; ?>
         <?php endif; ?>
-        <!-- <tr>
-          <td class="tbold">Giant Swing</td>
-          <td class="center">150</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-        </tr>
-        <tr>
-          <td class="blankrow" colspan="5"></td>
-        </tr>
-        <tr>
-          <td class="tbold" colspan="5">Adventure Tower</td>
-        </tr>
-        <tr>
-          <td>Free Fall</td>
-          <td class="center">100</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"></td>
-        </tr>
-        <tr>
-          <td>Rappelling</td>
-          <td class="center">100</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"></td>
-        </tr>
-        <tr>
-          <td>Wall Climbing</td>
-          <td class="center">100</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"></td>
-        </tr>
-        <tr>
-          <td class="blankrow" colspan="5"></td>
-        </tr>
-        <tr>
-          <td class="tbold">Aerial Walk</td>
-          <td class="center">150</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"></td>
-        </tr>
-        <tr>
-          <td class="blankrow" colspan="5"></td>
-        </tr>
-        <tr>
-          <td class="tbold">Two Ziplines</td>
-          <td class="center">250</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-        </tr>
-        <tr>
-          <td class="blankrow" colspan="5"></td>
-        </tr>
-        <tr>
-          <td class="tbold">Infinity Pool</td>
-          <td class="center">250</td>
-          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
-          <td class="tcenter"></td>
-          <td class="tcenter"></td>
-        </tr> -->
       </table>
       <table class="table main" width="100%">
         <tr>
+          <th class="fst" valign="middle" align="center">ATTRACTIONS</th>
+          <th class="scnd" valign="middle" align="center">INDIVIDUAL RATES (PHP)</th>
+          <th class="trd" width="30%" colspan="3" valign="middle" align="center">PACKAGES</th>
+        </tr>
+        <tr>
+          <td></td>
+          <td></td>
+          <?php if($packages): ?>
+            <?php foreach($packages as $package): ?>
+                <td class="tcenter"><?php echo $package->name ?></td>
+            <?php endforeach; ?>
+          <?php endif; ?>
+          <!-- <td class="tcenter">A</td>
+          <td class="tcenter">B</td>
+          <td class="tcenter">C</td> -->
+        </tr>
+        <tr class="mhide">
+          <td></td>
+          <td></td>
+          <?php if($packages): ?>
+            <?php foreach($packages as $package): ?>
+                <td class="tcenter"><?php echo $package->rate ?></td>
+            <?php endforeach; ?>
+          <?php endif; ?>
+          <!-- <td class="tcenter">670/Head</td>
+          <td class="tcenter">520/Head</td>
+          <td class="tcenter">300/Head</td> -->
+        </tr>
+        <?php if($regular_rates): ?>
+            <?php foreach($regular_rates as $rate): ?>
+                <?php if($rate->rate): ?>
+                  <tr>
+                    <td class="tbold"><?php echo $rate->attraction ?></td>
+                    <td class="center"><?php echo $rate->rate ?></td>
+                    <?php if($packages): ?>
+                      <?php foreach($packages as $package): ?>
+                        <?php $package_record = unserialize($rate->package_id); $package_record = is_array($package_record) ? $package_record : array(); ?>
+                          <td class="tcenter"><i class="<?php echo in_array($package->id, $package_record) ? 'fa fa-check' : '' ?>" aria-hidden="true"></i></td>
+                      <?php endforeach; ?>
+                    <?php endif; ?>
+                    <!-- <td class="tcenter"><i class="" aria-hidden="true"></i></td>
+                    <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
+                    <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td> -->
+                  </tr>
+                <?php else: ?>
+                  <tr>
+                    <td class="tbold" colspan="<?php echo (int) count($packages) + 2 ?>"><?php echo $rate->attraction ?></td>
+                  </tr>
+                <?php endif; ?>
+
+                <?php if($rate->sub_attractions): ?>
+                    <?php foreach($rate->sub_attractions as $sub_attraction): ?>
+                        <tr>
+                          <td class=""><?php echo $sub_attraction->attraction ?></td>
+                          <td class="center"><?php echo $sub_attraction->rate ?></td>
+                          <?php if($packages): ?>
+                            <?php foreach($packages as $package): ?>
+                              <?php $package_record = unserialize($sub_attraction->package_id); $package_record = is_array($package_record) ? $package_record : array(); ?>
+                                <td class="tcenter"><i class="<?php echo in_array($package->id, $package_record) ? 'fa fa-check' : '' ?>" aria-hidden="true"></i></td>
+                            <?php endforeach; ?>
+                          <?php endif; ?>
+                          <!-- <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
+                          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
+                          <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td> -->
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
+
+                <tr>
+                  <td class="blankrow" colspan="<?php echo (int) count($packages) + 2 ?>"></td>
+                </tr>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <?php /*<tr>
           <th class="fst" valign="middle" align="center">ATTRACTIONS</th>
           <th class="scnd" valign="middle" align="center">INDIVIDUAL RATES (PHP)</th>
           <th class="trd" width="30%" colspan="3" valign="middle" align="center">PACKAGES</th>
@@ -525,7 +535,7 @@
           <td class="tcenter"><i class="fa fa-check" aria-hidden="true"></i></td>
           <td class="tcenter"></td>
           <td class="tcenter"></td>
-        </tr>
+        </tr>*/ ?>
       </table>
       <div class="packageRates">
         <div class="mobilePackage promo active">
@@ -546,12 +556,14 @@
       </div>
       </div>
       <div class="promocont">
-        <p>Please note that Package A allows whole day use of the infinity pool. All packages allow a one-time use of the attractions included in each set.</p>
+        <?php echo $promo_copy->content ?>
+        <?php /*<p>Please note that Package A allows whole day use of the infinity pool. All packages allow a one-time use of the attractions included in each set.</p>
         <p>Please come the park in rubber shoes.</p>
-        <p>Promo period is January 21 - March 26, 2017.</p>
+        <p>Promo period is January 21 - March 26, 2017.</p>*/ ?>
       </div>
       <div class="dis">
-        <p>*rates above do not include the entrance fee of P80/head</p>
+        <?php echo $regular_copy->content ?>
+        <?php /*<p>*rates above do not include the entrance fee of P80/head</p>*/ ?>
       </div>
     </div>
     <div class="rates-box">

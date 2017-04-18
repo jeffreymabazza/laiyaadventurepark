@@ -100,15 +100,20 @@
 							<i class="glyphicon glyphicon-briefcase"></i>
 							Packages</a>
 						</li>
-						<li class="<?php echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>
+						<li class="<?php # echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>
 							<a href="<?php echo base_url() ?>admin/rates?is_promo">
 							<i class="glyphicon glyphicon-th"></i>
 							Promo Rates</a>
 						</li>
-						<li class="<?php echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>
+						<li class="<?php # echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>
 							<a href="<?php echo base_url() ?>admin/rates">
 							<i class="glyphicon glyphicon-th"></i>
 							Regular Rates</a>
+						</li>
+						<li class="<?php # echo $this->uri->segment(2) == 'rates' && $this->uri->segment(3) == null ? 'active' : '' ?>">>
+							<a href="<?php echo base_url() ?>admin/rates/settings">
+							<i class="glyphicon glyphicon-th"></i>
+							Rates Copy</a>
 						</li>
 					</ul>
 				</li>

@@ -1,0 +1,1 @@
+$('#promo, #regular').summernote({height: 300});

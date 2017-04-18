@@ -64,6 +64,9 @@ $route['admin/rates/create'] = 'adminRates/rates_create';
 $route['admin/rates/update/(:num)'] = 'adminRates/rates_update/$1';
 $route['admin/rates/delete/(:num)'] = 'adminRates/rates_delete/$1';
 
+$route['admin/rates/settings'] = 'adminSettings/index';
+$route['admin/rates/settings/update'] = 'adminSettings/update';
+
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

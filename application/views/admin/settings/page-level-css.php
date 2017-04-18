@@ -1,0 +1,1 @@
+<link rel="stylesheet" type="text/css" href="<?php echo base_url() ?>assets/cms/global/plugins/bootstrap-summernote/summernote.css">

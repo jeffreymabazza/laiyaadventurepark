@@ -4,7 +4,8 @@ class Welcome extends CI_Controller {
 
 	public function index()
 	{
-
+phpinfo();
+exit;
 		$data['sliders'] = $this->db->select('title, subtitle, filename')
 			->from('sliders')
 			->get()
@@ -14,6 +15,12 @@ class Welcome extends CI_Controller {
 			->from('packages')
 			->get()
 			->result();
+
+		$data['promo_copy'] = $this->db->select('content')
+			->from('rates_settings')
+			->where('type', FOR_PROMO)
+			->get()
+			->row();
 
 		$data['promo_rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id, is_promo')
 			->from('rates')
@@ -32,6 +39,12 @@ class Welcome extends CI_Controller {
 					->result();
 			}
 		}
+
+		$data['regular_copy'] = $this->db->select('content')
+			->from('rates_settings')
+			->where('type', FOR_REGULAR)
+			->get()
+			->row();
 
 		$data['regular_rates'] = $this->db->select('id, attraction, rate, attraction_id, package_id, is_promo')
 			->from('rates')
